@@ -1,0 +1,15 @@
+﻿<Window x:Class="JoinUp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JoinUp"
+        mc:Ignorable="d"
+        Title="JoinUp" Height="450" Width="800">
+    <Grid>
+        <Frame Name="MainFrame" />
+        <TextBlock x:Name="titleApp" Margin="230,0,230,298" TextAlignment="Center" FontSize="24" Height="57" VerticalAlignment="Bottom">JoinUp</TextBlock>
+        <Button x:Name="organizerButton" Height="30" Background="LightGray" Content="Я - организатор" Margin="230,0,424,0" Click="PressOrganizerButt" VerticalAlignment="Center"/>
+        <Button x:Name="memberButton" Background="LightGray" Content="Я - участник" Margin="424,0,0,0" Click="PressMemberButt" HorizontalAlignment="Left" Width="146" Height="30" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

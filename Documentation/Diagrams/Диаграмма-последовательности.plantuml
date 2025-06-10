@@ -1,0 +1,61 @@
+@startuml
+actor User
+
+participant MainWindow
+participant RegPage
+participant MenuPage
+participant CreateEvent
+participant VisitEvents
+participant SQLiteConnection
+
+User -> MainWindow : Запуск приложения
+MainWindow -> User : Отобразить выбор роли (организатор/участник)
+
+User -> MainWindow : Нажать кнопку "Я - организатор"
+MainWindow -> MainWindow : enterFlag = 'o'
+MainWindow -> RegPage : loadRegPage()
+RegPage -> User : Отобразить форму регистрации
+
+User -> RegPage : Ввести данные и нажать "Регистрация"
+RegPage -> RegPage : checkFields()
+RegPage -> RegPage : checkExistUsers()
+RegPage -> SQLiteConnection : Вставить нового пользователя
+SQLiteConnection --> RegPage : Подтверждение вставки
+RegPage -> MainWindow : Успешная регистрация
+MainWindow -> MenuPage : Открыть меню организатора
+
+MenuPage -> SQLiteConnection : Загрузить мероприятия организатора
+SQLiteConnection --> MenuPage : Список мероприятий
+MenuPage -> User : Отобразить мероприятия
+
+User -> MenuPage : Нажать "Создать мероприятие"
+MenuPage -> CreateEvent : Открыть окно создания мероприятия
+User -> CreateEvent : Ввести данные и нажать "Создать"
+CreateEvent -> SQLiteConnection : Вставить мероприятие с id организатора
+SQLiteConnection --> CreateEvent : Подтверждение вставки
+CreateEvent -> MenuPage : Закрыть окно и обновить список
+MenuPage -> SQLiteConnection : Загрузить мероприятия
+SQLiteConnection --> MenuPage : Обновленный список
+MenuPage -> User : Отобразить обновленный список мероприятий
+
+User -> MenuPage : Выбрать мероприятие и нажать "Подать заявку"
+MenuPage -> SQLiteConnection : Найти id мероприятия по названию
+SQLiteConnection --> MenuPage : eventId
+MenuPage -> SQLiteConnection : Вставить заявку на участие с id участника
+SQLiteConnection --> MenuPage : Подтверждение вставки
+MenuPage -> User : Показать сообщение об успешной заявке
+
+User -> MenuPage : Нажать "Просмотр посещаемости"
+MenuPage -> SQLiteConnection : Найти id мероприятия
+SQLiteConnection --> MenuPage : eventId
+MenuPage -> VisitEvents : Открыть окно посещаемости с eventId
+VisitEvents -> SQLiteConnection : Загрузить участников и посещаемость
+SQLiteConnection --> VisitEvents : Данные участников
+VisitEvents -> User : Отобразить список участников с отметками
+
+User -> VisitEvents : Отметить посещаемость участника
+VisitEvents -> SQLiteConnection : Обновить посещаемость в БД
+SQLiteConnection --> VisitEvents : Подтверждение обновления
+VisitEvents -> User : Обновить отображение
+
+@enduml

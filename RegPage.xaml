@@ -1,0 +1,21 @@
+﻿<Page x:Class="JoinUp.RegPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JoinUp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TitleRegPage">
+
+    <Grid>
+        <Frame Name="RegFrame" />
+        <TextBlock x:Name="logText" Margin="0,0,495,244" Height="21" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="37">Логин:</TextBlock>
+        <TextBlock x:Name="titleApp" Margin="230,0,230,298" TextAlignment="Center" FontSize="24" Height="57" VerticalAlignment="Bottom">JoinUp</TextBlock>
+        <TextBox x:Name="userField" Margin="310,0,310,241" Grid.Row="1" Height="27" VerticalAlignment="Bottom"></TextBox>
+        <TextBox x:Name="passField" Margin="310,0,310,196" Grid.Row="1" Height="26" VerticalAlignment="Bottom"></TextBox>
+        <Button x:Name="loginButton" Background="LightGray" Content="Войти" Click="PressLoginButt" Margin="244,0,400,143" Grid.Row="1" Height="27" VerticalAlignment="Bottom"/>
+        <Button x:Name="regButton" Background="LightGray" Content="Регистрация" Click="PressRegButt" Margin="405,0,239,143" Grid.Row="1" Height="27" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="passText" Margin="0,0,495,198" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="45"><Run Language="ru-ru" Text="Пароль:"/></TextBlock>
+    </Grid>
+</Page>

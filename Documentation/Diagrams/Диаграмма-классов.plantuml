@@ -1,0 +1,95 @@
+﻿@startuml
+skinparam classAttributeIconSize 0
+
+package JoinUp {
+
+  class MainWindow {
+    + static char enterFlag
+    --
+    + MainWindow()
+    - void loadRegPage()
+    + void PressOrganizerButt(object sender, RoutedEventArgs e)
+    + void PressMemberButt(object sender, RoutedEventArgs e)
+  }
+
+  class VisitEvents {
+    - int eventId
+    - string connectionString
+    --
+    + VisitEvents(int eventId)
+    - void LoadParticipants()
+    - void MarkAttendance_Click(object sender, RoutedEventArgs e)
+  }
+
+  class UsersEvents {
+    + int AttendanceId
+    + string Name
+    + bool Attendance
+  }
+
+  class RegPage {
+    - static int memoryIdUser
+    - static string memoryNameUser
+    - static string memoryPassUser
+    - string connectionString
+    - string memberInsertQuery
+    - string memberCheckUsersQuery
+    - string organizerCheckUsersQuery
+    - string organizerInsertQuery
+    --
+    + RegPage()
+    - int checkFields()
+    - int checkExistUsers()
+    - void PressLoginButt(object sender, RoutedEventArgs e)
+    - void PressRegButt(object sender, RoutedEventArgs e)
+  }
+
+  class MenuPage {
+    - string connectionString
+    --
+    + MenuPage()
+    - void LoadEvents()
+    - void createEventButt(object sender, RoutedEventArgs e)
+    - void DeleteEventClick(object sender, RoutedEventArgs e)
+    - void OpenVisit_Click(object sender, RoutedEventArgs e)
+    - void UpdateButtonClick(object sender, RoutedEventArgs e)
+    - void SendBitButton(object sender, RoutedEventArgs e)
+  }
+
+  class Event {
+    + string Name
+    + string Description
+    + string Date
+  }
+
+  class CreateEvent {
+    - string connectionString
+    - string insertEvent
+    --
+    + CreateEvent()
+    - void RegEvent()
+    - void PressCreateButt(object sender, RoutedEventArgs e)
+  }
+
+  class AttendanceConverter {
+    --
+    + object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    + object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+  }
+
+  interface IValueConverter
+
+  AttendanceConverter ..|> IValueConverter
+
+  MainWindow --> RegPage : navigates to >
+  VisitEvents --> UsersEvents : uses >
+  RegPage ..> SQLiteConnection : uses >
+  VisitEvents ..> SQLiteConnection : uses >
+  MenuPage ..> SQLiteConnection : uses >
+  MenuPage --> Event : manages >
+  CreateEvent ..> SQLiteConnection : uses >
+  CreateEvent ..> RegPage : uses static memoryIdUser
+
+}
+
+@enduml

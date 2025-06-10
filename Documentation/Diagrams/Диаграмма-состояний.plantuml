@@ -1,0 +1,56 @@
+@startuml
+skinparam state {
+  BackgroundColor #EEE
+  BorderColor #333
+}
+
+[*] --> RoleSelection : Запуск приложения
+
+state RoleSelection {
+  [*] --> AwaitChoice
+  AwaitChoice --> Registration : Нажата кнопка "Организатор" (enterFlag='o')
+  AwaitChoice --> Registration : Нажата кнопка "Участник" (enterFlag='m')
+}
+
+state Registration {
+  [*] --> FillForm
+  FillForm --> SubmitLogin : Нажатие кнопки "Войти"
+  FillForm --> SubmitRegister : Нажатие кнопки "Зарегистрироваться"
+  SubmitLogin --> LoginSuccess : Проверка успешна
+  SubmitLogin --> LoginFailure : Ошибка
+  SubmitRegister --> RegSuccess : Регистрация успешна
+  SubmitRegister --> RegFailure : Ошибка
+  LoginFailure --> FillForm
+  RegFailure --> FillForm
+  LoginSuccess --> Menu
+  RegSuccess --> Menu
+}
+
+state Menu {
+  [*] --> EventsList
+
+  EventsList --> CreateEvent : Нажатие "Создать мероприятие" (только для организатора)
+  EventsList --> DeleteEvent : Нажатие "Удалить мероприятие" (только для организатора)
+  EventsList --> ApplyEvent : Нажатие "Подать заявку" (только для участника)
+  EventsList --> OpenAttendance : Нажатие "Открыть посещаемость" (только для организатора)
+
+  CreateEvent --> Creating
+  Creating --> Created : Создание успешно
+  Creating --> CreateError : Ошибка создания
+  CreateError --> EventsList
+
+  DeleteEvent --> Deleted : Успешное удаление
+  DeleteEvent --> DeleteError : Ошибка удаления
+  DeleteError --> EventsList
+
+  ApplyEvent --> Applied : Заявка подана
+  ApplyEvent --> ApplyError : Ошибка заявки
+  ApplyError --> EventsList
+
+  OpenAttendance --> AttendanceView
+  AttendanceView --> MarkAttendance : Отметить явку
+  MarkAttendance --> AttendanceView
+  AttendanceView --> EventsList
+}
+
+@enduml

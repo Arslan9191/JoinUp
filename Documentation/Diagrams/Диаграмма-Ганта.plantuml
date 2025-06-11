@@ -1,0 +1,16 @@
+@startgantt
+
+[Requirements Analysis and Task Definition] lasts 5 days
+[Database Structure Design (SQLite)] lasts 4 days and starts at [Requirements Analysis and Task Definition]'s end
+[Create WPF Project on .NET 8] lasts 3 days and starts at [Database Structure Design (SQLite)]'s end
+[UI Development (WPF, XAML, C#)] lasts 6 days and starts at [Create WPF Project on .NET 8]'s end
+[Navigation Implementation Between Windows] lasts 3 days and starts at [UI Development (WPF, XAML, C#)]'s end
+[User Registration and Authorization Implementation] lasts 5 days and starts at [Navigation Implementation Between Windows]'s end
+[Event Creation and Management Functionality] lasts 5 days and starts at [User Registration and Authorization Implementation]'s end
+[Attendance Tracking Implementation] lasts 4 days and starts at [Event Creation and Management Functionality]'s end
+[UI Data Validation] lasts 3 days and starts at [Attendance Tracking Implementation]'s end
+[Application Testing] lasts 5 days and starts at [UI Data Validation]'s end
+[Documentation and Instructions Preparation] lasts 4 days and starts at [Application Testing]'s end
+[Refactoring and UX Improvement] lasts 5 days and starts at [Documentation and Instructions Preparation]'s end
+
+@endgantt
